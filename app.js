@@ -1,6 +1,5 @@
 const serverless = require("serverless-http");
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
@@ -8,124 +7,230 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors()); // Enable CORS for all routes
 
-const connectionString =
-  "mongodb+srv://asis:root@cluster0.bglb8.mongodb.net/fractal-service";
-(async () => {
-  await mongoose.connect(connectionString);
+let orders = [];
+let products = [
+  {
+    ID: "1",
+    Name: "Bread",
+    UnitPrice: 2.99,
+  },
+  {
+    ID: "2",
+    Name: "Milk",
+    UnitPrice: 1.99,
+  },
+  {
+    ID: "3",
+    Name: "Eggs",
+    UnitPrice: 2.49,
+  },
+  {
+    ID: "4",
+    Name: "Rice",
+    UnitPrice: 3.99,
+  },
+  {
+    ID: "5",
+    Name: "Water",
+    UnitPrice: 0.99,
+  },
+  {
+    ID: "6",
+    Name: "Toilet Paper",
+    UnitPrice: 4.49,
+  },
+  {
+    ID: "7",
+    Name: "Soap",
+    UnitPrice: 1.79,
+  },
+  {
+    ID: "8",
+    Name: "Canned Beans",
+    UnitPrice: 1.29,
+  },
+  {
+    ID: "9",
+    Name: "Diapers",
+    UnitPrice: 8.99,
+  },
+  {
+    ID: "10",
+    Name: "Salt",
+    UnitPrice: 0.79,
+  },
+];
 
-  // const db = mongoose.connection;
-  // db.on("error", console.error.bind(console, "MongoDB connection error:"));
-  // db.once("open", () => {
-  //   console.log("Connected to MongoDB");
-  // });
+// Dummy data for initialization
+const initialOrders = [];
 
-  // // SCHEMAS
-  // const ProductSchema = new mongoose.Schema({
-  //   ID: String,
-  //   Name: String,
-  //   UnitPrice: Number,
-  // });
+const initialProducts = [
+  {
+    ID: "1",
+    Name: "Bread",
+    UnitPrice: 2.99,
+  },
+  {
+    ID: "2",
+    Name: "Milk",
+    UnitPrice: 1.99,
+  },
+  {
+    ID: "3",
+    Name: "Eggs",
+    UnitPrice: 2.49,
+  },
+  {
+    ID: "4",
+    Name: "Rice",
+    UnitPrice: 3.99,
+  },
+  {
+    ID: "5",
+    Name: "Water",
+    UnitPrice: 0.99,
+  },
+  {
+    ID: "6",
+    Name: "Toilet Paper",
+    UnitPrice: 4.49,
+  },
+  {
+    ID: "7",
+    Name: "Soap",
+    UnitPrice: 1.79,
+  },
+  {
+    ID: "8",
+    Name: "Canned Beans",
+    UnitPrice: 1.29,
+  },
+  {
+    ID: "9",
+    Name: "Diapers",
+    UnitPrice: 8.99,
+  },
+  {
+    ID: "10",
+    Name: "Salt",
+    UnitPrice: 0.79,
+  },
+];
 
-  // const Product = mongoose.model("Product", ProductSchema);
+// Initialize orders and products
+orders = [...initialOrders];
+products = [...initialProducts];
+app.get("/", (req, res) => {
+  res.status(200).json({
+    data: "Fractal service",
+    status: 200,
+    message: "success",
+  });
+});
 
-  // const ProductOrderSchema = new mongoose.Schema({
-  //   Product: ProductSchema,
-  //   Qty: Number,
-  //   TotalPrice: Number,
-  // });
+app.get("/orders", (req, res) => {
+  res.status(200).json({
+    data: orders,
+    status: 200,
+    message: "success",
+  });
+});
 
-  // const OrderSchema = new mongoose.Schema({
-  //   ID: String,
-  //   Order: String,
-  //   Date: Date,
-  //   Products: [ProductOrderSchema],
-  //   FinalPrice: Number,
-  // });
+app.get("/orders/:id", (req, res) => {
+  const orderId = req.params.id;
+  const order = orders.find((o) => o.ID === orderId);
 
-  // const Order = mongoose.model("Order", OrderSchema);
-
-  // app.get("/orders", async (req, res) => {
-  //   try {
-  //     const orders = await Order.find();
-  //     res.status(200).json(orders);
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
-
-  // app.get("/orders/:id", async (req, res) => {
-  //   try {
-  //     const order = await Order.findById(req.params.id);
-  //     if (!order) {
-  //       res.status(404).json({ error: "Order not found" });
-  //     } else {
-  //       res.status(200).json(order);
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
-
-  // app.post("/orders", async (req, res) => {
-  //   const order = req.body;
-  //   try {
-  //     if (
-  //       !order ||
-  //       !order.ID ||
-  //       !order.Order ||
-  //       !order.Date ||
-  //       !order.Products ||
-  //       !order.FinalPrice
-  //     ) {
-  //       return res.status(400).json({
-  //         status: 400,
-  //         message: "Bad Request. Order data is incomplete.",
-  //       });
-  //     }
-
-  //     const newOrder = new Order(order);
-  //     const savedOrder = await newOrder.save();
-  //     res.status(201).json(savedOrder);
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
-
-  // app.put("/orders/:id", async (req, res) => {
-  //   try {
-  //     const updatedOrder = await Order.findByIdAndUpdate(
-  //       req.params.id,
-  //       req.body,
-  //       {
-  //         new: true,
-  //       }
-  //     );
-  //     if (!updatedOrder) {
-  //       res.status(404).json({ error: "Order not found" });
-  //     } else {
-  //       res.status(200).json(updatedOrder);
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
-
-  // app.get("/products", async (req, res) => {
-  //   try {
-  //     const orders = await Product.find();
-  //     res.status(200).json(orders);
-  //   } catch (error) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
-
-  app.get("/", (req, res) => {
-    res.send({
-      data: "Fractal service",
+  if (!order) {
+    res.status(404).json({ error: "Order not found" });
+  } else {
+    res.status(200).json({
+      data: order,
       status: 200,
       message: "success",
     });
+  }
+});
+
+app.post("/orders", (req, res) => {
+  const order = req.body;
+
+  if (
+    !order ||
+    !order.Order ||
+    !order.Date ||
+    !order.Products ||
+    !order.FinalPrice
+  ) {
+    return res.status(400).json({
+      status: 400,
+      message: "Bad Request. Order data is incomplete.",
+    });
+  }
+
+
+  if(orders.map((o) => o.Order).includes(order.Order)){
+    return res.status(400).json({
+      status: 400,
+      message: "Bad Request. The order code has already been taken.",
+    });
+  }
+
+  order.ID = (orders.length+1).toString();
+  orders.push(order);
+  res.status(201).json({
+    data: order,
+    status: 201,
+    message: "Order created successfully.",
   });
-})();
+});
+
+app.put("/orders/:id", (req, res) => {
+  const orderId = req.params.id;
+  const updatedOrderData = req.body;
+
+  const existingOrderIndex = orders.findIndex((order) => order.ID === orderId);
+
+  if (existingOrderIndex === -1) {
+    res.status(404).json({
+      status: 404,
+      message: "Order not found.",
+    });
+  } else {
+    orders[existingOrderIndex] = updatedOrderData;
+    res.status(200).json({
+      data: orders[existingOrderIndex],
+      status: 200,
+      message: "Order updated successfully.",
+    });
+  }
+});
+app.delete("/orders/:id", (req, res) => {
+  const orderId = req.params.id;
+
+  const existingOrderIndex = orders.findIndex((order) => order.ID === orderId);
+
+  if (existingOrderIndex === -1) {
+    res.status(404).json({
+      status: 404,
+      message: "Order not found.",
+    });
+  } else {
+    orders = orders.filter((order) => order.ID !== orderId);
+    res.status(200).json({
+      data: orderId,
+      status: 200,
+      message: "Order deleted successfully.",
+    });
+  }
+});
+
+app.get("/products", (req, res) => {
+  res.status(200).json({
+    data: products,
+    status: 200,
+    message: "success",
+  });
+});
+
 // app.listen(4000, () => console.log(`Listening on: 4000`));
 module.exports.handler = serverless(app);
