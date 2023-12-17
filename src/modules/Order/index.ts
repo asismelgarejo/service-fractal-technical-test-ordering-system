@@ -17,6 +17,7 @@ export default class OrderModule {
     const orderService = new OrderService(OrderModel);
     const orderController = new OrderController(orderService);
     const subRoutes = orderController.Init();
-    router.use("/orders", subRoutes);
+    // router.use("/orders", subRoutes);
+    router.use("/orders/:path*?", subRoutes);
   }
 }

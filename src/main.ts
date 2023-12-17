@@ -1,4 +1,3 @@
-const serverless = require("serverless-http");
 import express from "express";
 import cors from "cors";
 import pkg from "body-parser";
@@ -21,15 +20,26 @@ app.use(urlencoded({ extended: false }));
 async function main() {
   const dbClient = await InitializeDB();
   OrderModule.Init(dbClient, app);
-  app.listen(PORT, () => {
-    console.log("Server running on " + `localhost:${PORT}`);
-  });
+  // app.listen(PORT, () => {
+  //   console.log("Server running on " + `localhost:${PORT}`);
+  // });
 }
-
-(async () => {
-  try {
-    await main();
-  } catch (err) {
+main()
+  .then(() => {})
+  .catch((err) => {
     console.log(err);
-  }
-})();
+  });
+
+app.get("/hello", (_, res, _2) => {
+  res.status(200).json({ message: "OK DEV" });
+});
+
+app.get("/orders1", (req, res, _2) => {
+  res.status(200).json({ message: "NO MACNHES" });
+});
+
+app.use((_, res, _2) => {
+  res.status(404).json({ error: "NOT FOUND" });
+});
+
+export default app;
