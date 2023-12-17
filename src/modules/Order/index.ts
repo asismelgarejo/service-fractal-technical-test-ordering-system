@@ -3,7 +3,7 @@ import OrderSchema from "./Order.schema";
 
 import OrderController from "./Order.controller";
 import OrderService from "./Order.service";
-import { OrderDocument, OrderModelType } from "../../constants/interfaces";
+import { OrderDocument, OrderModelType } from "./interfaces/Order.interfaces";
 import { Router } from "express";
 
 export default class OrderModule {

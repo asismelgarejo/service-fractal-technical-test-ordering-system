@@ -1,6 +1,6 @@
 import { HttpResponse } from "../../constants/interfaces";
 import OrderService from "./Order.service";
-import { OrderDTO } from "./dto/Order.dto";
+import { OrderDTO } from "./interfaces";
 import { Response, Router, Request } from "express";
 import httpStatus, { ReasonPhrases } from "http-status-codes";
 

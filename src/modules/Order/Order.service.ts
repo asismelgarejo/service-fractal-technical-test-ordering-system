@@ -1,6 +1,4 @@
-import { OrderDTO } from "./dto/Order.dto";
-import { OrderModelType } from "../../constants/interfaces";
-
+import { OrderDTO, OrderModelType } from "./interfaces";
 export default class OrderService {
   constructor(private model: OrderModelType) {}
 
