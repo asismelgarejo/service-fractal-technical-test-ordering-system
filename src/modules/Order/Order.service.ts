@@ -4,14 +4,20 @@ export default class OrderService {
 
   async getOrders(): Promise<OrderDTO[]> {
     try {
-      return this.model.find();
+      return await this.model
+        .find()
+        .populate({
+          path: "Products.Product",
+          model: "Product",
+        })
+        .exec();
     } catch (error) {
       console.log("OrderService: ", error);
       throw error;
     }
   }
 
-  async createOrder(payload: Omit<OrderDTO, "_id">): Promise<void> {
+  async createOrder(payload: Omit<OrderDTO, "ID">): Promise<void> {
     try {
       await this.model.create(payload);
     } catch (error) {

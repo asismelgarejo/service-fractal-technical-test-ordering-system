@@ -1,3 +1,4 @@
+"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1110,7 +1111,7 @@ var require_transport = __commonJS({
     var ServerlessRequest = require_request();
     var ServerlessResponse = require_response();
     var { getEventSource } = require_event_sources();
-    var Response2 = require_response();
+    var Response3 = require_response();
     var isBinary = require_is_binary();
     function forwardResponse({
       binarySettings,
@@ -1121,13 +1122,13 @@ var require_transport = __commonJS({
       log
     }) {
       const statusCode = response.statusCode;
-      const headers = Response2.headers(response);
+      const headers = Response3.headers(response);
       const isBase64Encoded = isBinary({
         headers,
         binarySettings
       });
       const encoding = isBase64Encoded ? "base64" : "utf8";
-      const body = Response2.body(response).toString(encoding);
+      const body = Response3.body(response).toString(encoding);
       const logBody = isBase64Encoded ? "[BASE64_ENCODED]" : body;
       log.debug("SERVERLESS_EXPRESS:FORWARD_RESPONSE:EVENT_SOURCE_RESPONSE_PARAMS", {
         statusCode,
@@ -22363,7 +22364,7 @@ var require_application = __commonJS({
   "node_modules/express/lib/application.js"(exports, module2) {
     "use strict";
     var finalhandler = require_finalhandler();
-    var Router2 = require_router();
+    var Router3 = require_router();
     var methods = require_methods();
     var middleware = require_init();
     var query = require_query();
@@ -22428,7 +22429,7 @@ var require_application = __commonJS({
     };
     app.lazyrouter = function lazyrouter() {
       if (!this._router) {
-        this._router = new Router2({
+        this._router = new Router3({
           caseSensitive: this.enabled("case sensitive routing"),
           strict: this.enabled("strict routing")
         });
@@ -24290,7 +24291,7 @@ var require_express2 = __commonJS({
     var mixin = require_merge_descriptors();
     var proto = require_application();
     var Route = require_route();
-    var Router2 = require_router();
+    var Router3 = require_router();
     var req = require_request2();
     var res = require_response2();
     exports = module2.exports = createApplication;
@@ -24313,7 +24314,7 @@ var require_express2 = __commonJS({
     exports.request = req;
     exports.response = res;
     exports.Route = Route;
-    exports.Router = Router2;
+    exports.Router = Router3;
     exports.json = bodyParser.json;
     exports.query = require_query();
     exports.raw = bodyParser.raw;
@@ -50022,7 +50023,7 @@ var require_commands = __commonJS({
       }
     };
     exports.Query = Query;
-    var Response2 = class {
+    var Response3 = class {
       constructor(message, msgHeader, msgBody, opts) {
         this.documents = new Array(0);
         this.parsed = false;
@@ -50097,7 +50098,7 @@ var require_commands = __commonJS({
         this.parsed = true;
       }
     };
-    exports.Response = Response2;
+    exports.Response = Response3;
     var OPTS_CHECKSUM_PRESENT = 1;
     var OPTS_MORE_TO_COME = 2;
     var OPTS_EXHAUST_ALLOWED = 1 << 16;
@@ -62809,7 +62810,7 @@ var require_document = __commonJS({
     var ObjectExpectedError = require_objectExpected();
     var ObjectParameterError = require_objectParameter();
     var ParallelValidateError = require_parallelValidate();
-    var Schema2 = require_schema2();
+    var Schema3 = require_schema2();
     var StrictModeError = require_strict();
     var ValidationError = require_validation();
     var ValidatorError = require_validator();
@@ -62862,7 +62863,7 @@ var require_document = __commonJS({
       }
       options = Object.assign({}, options);
       if (this.$__schema == null) {
-        const _schema = utils.isObject(fields) && !fields.instanceOfSchema ? new Schema2(fields) : fields;
+        const _schema = utils.isObject(fields) && !fields.instanceOfSchema ? new Schema3(fields) : fields;
         this.$__setSchema(_schema);
         fields = skipId;
         skipId = options;
@@ -72158,9 +72159,9 @@ var require_schema2 = __commonJS({
     var isPOJO = utils.isPOJO;
     var id = 0;
     var numberRE = /^\d+$/;
-    function Schema2(obj, options) {
-      if (!(this instanceof Schema2)) {
-        return new Schema2(obj, options);
+    function Schema3(obj, options) {
+      if (!(this instanceof Schema3)) {
+        return new Schema3(obj, options);
       }
       this.obj = obj;
       this.paths = {};
@@ -72268,34 +72269,34 @@ var require_schema2 = __commonJS({
         }(prop));
       }
     }
-    Schema2.prototype = Object.create(EventEmitter.prototype);
-    Schema2.prototype.constructor = Schema2;
-    Schema2.prototype.instanceOfSchema = true;
-    Object.defineProperty(Schema2.prototype, "$schemaType", {
+    Schema3.prototype = Object.create(EventEmitter.prototype);
+    Schema3.prototype.constructor = Schema3;
+    Schema3.prototype.instanceOfSchema = true;
+    Object.defineProperty(Schema3.prototype, "$schemaType", {
       configurable: false,
       enumerable: false,
       writable: true
     });
-    Object.defineProperty(Schema2.prototype, "childSchemas", {
+    Object.defineProperty(Schema3.prototype, "childSchemas", {
       configurable: false,
       enumerable: true,
       writable: true
     });
-    Object.defineProperty(Schema2.prototype, "virtuals", {
+    Object.defineProperty(Schema3.prototype, "virtuals", {
       configurable: false,
       enumerable: true,
       writable: true
     });
-    Schema2.prototype.obj;
-    Schema2.prototype.paths;
-    Schema2.prototype.tree;
-    Schema2.prototype.clone = function() {
+    Schema3.prototype.obj;
+    Schema3.prototype.paths;
+    Schema3.prototype.tree;
+    Schema3.prototype.clone = function() {
       const s = this._clone();
       s.on("init", (v) => this.emit("init", v));
       return s;
     };
-    Schema2.prototype._clone = function _clone(Constructor) {
-      Constructor = Constructor || (this.base == null ? Schema2 : this.base.Schema);
+    Schema3.prototype._clone = function _clone(Constructor) {
+      Constructor = Constructor || (this.base == null ? Schema3 : this.base.Schema);
       const s = new Constructor({}, this._userProvidedOptions);
       s.base = this.base;
       s.obj = this.obj;
@@ -72353,8 +72354,8 @@ var require_schema2 = __commonJS({
       s.aliases = Object.assign({}, this.aliases);
       return s;
     };
-    Schema2.prototype.pick = function(paths, options) {
-      const newSchema = new Schema2({}, options || this.options);
+    Schema3.prototype.pick = function(paths, options) {
+      const newSchema = new Schema3({}, options || this.options);
       if (!Array.isArray(paths)) {
         throw new MongooseError('Schema#pick() only accepts an array argument, got "' + typeof paths + '"');
       }
@@ -72371,8 +72372,8 @@ var require_schema2 = __commonJS({
       }
       return newSchema;
     };
-    Schema2.prototype.omit = function(paths, options) {
-      const newSchema = new Schema2(this, options || this.options);
+    Schema3.prototype.omit = function(paths, options) {
+      const newSchema = new Schema3(this, options || this.options);
       if (!Array.isArray(paths)) {
         throw new MongooseError(
           'Schema#omit() only accepts an array argument, got "' + typeof paths + '"'
@@ -72386,7 +72387,7 @@ var require_schema2 = __commonJS({
       }
       return newSchema;
     };
-    Schema2.prototype.defaultOptions = function(options) {
+    Schema3.prototype.defaultOptions = function(options) {
       this._userProvidedOptions = options == null ? {} : clone(options);
       const baseOptions = this.base && this.base.options || {};
       const strict = "strict" in baseOptions ? baseOptions.strict : true;
@@ -72429,13 +72430,13 @@ var require_schema2 = __commonJS({
       }
       return options;
     };
-    Schema2.prototype.discriminator = function(name, schema) {
+    Schema3.prototype.discriminator = function(name, schema) {
       this._applyDiscriminators = this._applyDiscriminators || /* @__PURE__ */ new Map();
       this._applyDiscriminators.set(name, schema);
       return this;
     };
-    Schema2.prototype.add = function add(obj, prefix) {
-      if (obj instanceof Schema2 || obj != null && obj.instanceOfSchema) {
+    Schema3.prototype.add = function add(obj, prefix) {
+      if (obj instanceof Schema3 || obj != null && obj.instanceOfSchema) {
         merge(this, obj);
         return this;
       }
@@ -72462,7 +72463,7 @@ var require_schema2 = __commonJS({
         }
         let isMongooseTypeString = false;
         if (typeof val === "string") {
-          const MongooseTypes2 = this.base != null ? this.base.Schema.Types : Schema2.Types;
+          const MongooseTypes2 = this.base != null ? this.base.Schema.Types : Schema3.Types;
           const upperVal = val.charAt(0).toUpperCase() + val.substring(1);
           isMongooseTypeString = MongooseTypes2[upperVal] != null;
         }
@@ -72514,7 +72515,7 @@ var require_schema2 = __commonJS({
             if (this._userProvidedOptions.toJSON != null) {
               childSchemaOptions.toJSON = utils.omit(this._userProvidedOptions.toJSON, ["transform"]);
             }
-            const _schema = new Schema2(_typeDef, childSchemaOptions);
+            const _schema = new Schema3(_typeDef, childSchemaOptions);
             _schema.$implicitlyCreated = true;
             const schemaWrappedPath = Object.assign({}, val, { [typeKey]: _schema });
             this.path(prefix + key, schemaWrappedPath);
@@ -72538,11 +72539,11 @@ var require_schema2 = __commonJS({
       aliasFields(this, aliasObj);
       return this;
     };
-    Schema2.prototype.alias = function alias(path, alias) {
+    Schema3.prototype.alias = function alias(path, alias) {
       aliasFields(this, { [path]: alias });
       return this;
     };
-    Schema2.prototype.removeIndex = function removeIndex(index) {
+    Schema3.prototype.removeIndex = function removeIndex(index) {
       if (arguments.length > 1) {
         throw new Error("removeIndex() takes only 1 argument");
       }
@@ -72564,18 +72565,18 @@ var require_schema2 = __commonJS({
       }
       return this;
     };
-    Schema2.prototype.clearIndexes = function clearIndexes() {
+    Schema3.prototype.clearIndexes = function clearIndexes() {
       this._indexes.length = 0;
       return this;
     };
-    Schema2.reserved = /* @__PURE__ */ Object.create(null);
-    Schema2.prototype.reserved = Schema2.reserved;
-    var reserved = Schema2.reserved;
+    Schema3.reserved = /* @__PURE__ */ Object.create(null);
+    Schema3.prototype.reserved = Schema3.reserved;
+    var reserved = Schema3.reserved;
     reserved["prototype"] = // EventEmitter
     reserved.emit = reserved.listeners = reserved.removeListener = // document properties and functions
     reserved.collection = reserved.errors = reserved.get = reserved.init = reserved.isModified = reserved.isNew = reserved.populated = reserved.remove = reserved.save = reserved.toObject = reserved.validate = 1;
     reserved.collection = 1;
-    Schema2.prototype.path = function(path, obj) {
+    Schema3.prototype.path = function(path, obj) {
       if (obj === void 0) {
         const cleanPath = _pathToPositionalSyntax(path);
         let schematype = _getPath(this, path, cleanPath);
@@ -72751,13 +72752,13 @@ var require_schema2 = __commonJS({
       }
       return null;
     }
-    Object.defineProperty(Schema2.prototype, "base", {
+    Object.defineProperty(Schema3.prototype, "base", {
       configurable: true,
       enumerable: false,
       writable: true,
       value: null
     });
-    Schema2.prototype.interpretAsType = function(path, obj, options) {
+    Schema3.prototype.interpretAsType = function(path, obj, options) {
       if (obj instanceof SchemaType) {
         if (obj.path === path) {
           return obj;
@@ -72766,7 +72767,7 @@ var require_schema2 = __commonJS({
         clone2.path = path;
         return clone2;
       }
-      const MongooseTypes2 = this.base != null ? this.base.Schema.Types : Schema2.Types;
+      const MongooseTypes2 = this.base != null ? this.base.Schema.Types : Schema3.Types;
       const Types = this.base != null ? this.base.Types : require_types2();
       if (!utils.isPOJO(obj) && !(obj instanceof SchemaTypeOptions)) {
         const constructorName = utils.getFunctionName(obj.constructor);
@@ -72784,9 +72785,9 @@ var require_schema2 = __commonJS({
       if (Array.isArray(type) || type === Array || type === "array" || type === MongooseTypes2.Array) {
         let cast = type === Array || type === "array" ? obj.cast || obj.of : type[0];
         if (cast && cast.instanceOfSchema) {
-          if (!(cast instanceof Schema2)) {
+          if (!(cast instanceof Schema3)) {
             if (this.options._isMerging) {
-              cast = new Schema2(cast);
+              cast = new Schema3(cast);
             } else {
               throw new TypeError("Schema for array path `" + path + `\` is from a different copy of the Mongoose module. Please make sure you're using the same version of Mongoose everywhere with \`npm list mongoose\`. If you are still getting this error, please add \`new Schema()\` around the path: ${path}: new Schema(...)`);
             }
@@ -72794,9 +72795,9 @@ var require_schema2 = __commonJS({
           return new MongooseTypes2.DocumentArray(path, cast, obj);
         }
         if (cast && cast[options.typeKey] && cast[options.typeKey].instanceOfSchema) {
-          if (!(cast[options.typeKey] instanceof Schema2)) {
+          if (!(cast[options.typeKey] instanceof Schema3)) {
             if (this.options._isMerging) {
-              cast[options.typeKey] = new Schema2(cast[options.typeKey]);
+              cast[options.typeKey] = new Schema3(cast[options.typeKey]);
             } else {
               throw new TypeError("Schema for array path `" + path + `\` is from a different copy of the Mongoose module. Please make sure you're using the same version of Mongoose everywhere with \`npm list mongoose\`. If you are still getting this error, please add \`new Schema()\` around the path: ${path}: new Schema(...)`);
             }
@@ -72829,10 +72830,10 @@ var require_schema2 = __commonJS({
             }
             if (this._userProvidedOptions.hasOwnProperty("_id")) {
               childSchemaOptions._id = this._userProvidedOptions._id;
-            } else if (Schema2.Types.DocumentArray.defaultOptions._id != null) {
-              childSchemaOptions._id = Schema2.Types.DocumentArray.defaultOptions._id;
+            } else if (Schema3.Types.DocumentArray.defaultOptions._id != null) {
+              childSchemaOptions._id = Schema3.Types.DocumentArray.defaultOptions._id;
             }
-            const childSchema = new Schema2(castFromTypeKey, childSchemaOptions);
+            const childSchema = new Schema3(castFromTypeKey, childSchemaOptions);
             childSchema.$implicitlyCreated = true;
             return new MongooseTypes2.DocumentArray(path, childSchema, obj);
           } else {
@@ -72898,7 +72899,7 @@ var require_schema2 = __commonJS({
       if (utils.hasUserDefinedProperty(obj, "of")) {
         const isInlineSchema = utils.isPOJO(obj.of) && Object.keys(obj.of).length > 0 && !utils.hasUserDefinedProperty(obj.of, schema.options.typeKey);
         if (isInlineSchema) {
-          _mapType = { [schema.options.typeKey]: new Schema2(obj.of) };
+          _mapType = { [schema.options.typeKey]: new Schema3(obj.of) };
         } else if (utils.isPOJO(obj.of)) {
           _mapType = Object.assign({}, obj.of);
         } else {
@@ -72918,7 +72919,7 @@ var require_schema2 = __commonJS({
       }
       schemaType.$__schemaType = schema.interpretAsType(mapPath, _mapType, options);
     }
-    Schema2.prototype.eachPath = function(fn) {
+    Schema3.prototype.eachPath = function(fn) {
       const keys = Object.keys(this.paths);
       const len = keys.length;
       for (let i = 0; i < len; ++i) {
@@ -72926,7 +72927,7 @@ var require_schema2 = __commonJS({
       }
       return this;
     };
-    Schema2.prototype.requiredPaths = function requiredPaths(invalidate) {
+    Schema3.prototype.requiredPaths = function requiredPaths(invalidate) {
       if (this._requiredpaths && !invalidate) {
         return this._requiredpaths;
       }
@@ -72942,14 +72943,14 @@ var require_schema2 = __commonJS({
       this._requiredpaths = ret;
       return this._requiredpaths;
     };
-    Schema2.prototype.indexedPaths = function indexedPaths() {
+    Schema3.prototype.indexedPaths = function indexedPaths() {
       if (this._indexedpaths) {
         return this._indexedpaths;
       }
       this._indexedpaths = this.indexes();
       return this._indexedpaths;
     };
-    Schema2.prototype.pathType = function(path) {
+    Schema3.prototype.pathType = function(path) {
       if (this.paths.hasOwnProperty(path)) {
         return "real";
       }
@@ -72976,7 +72977,7 @@ var require_schema2 = __commonJS({
       }
       return "adhocOrUndefined";
     };
-    Schema2.prototype.hasMixedParent = function(path) {
+    Schema3.prototype.hasMixedParent = function(path) {
       const subpaths = path.split(/\./g);
       path = "";
       for (let i = 0; i < subpaths.length; ++i) {
@@ -72987,7 +72988,7 @@ var require_schema2 = __commonJS({
       }
       return null;
     };
-    Schema2.prototype.setupTimestamp = function(timestamps) {
+    Schema3.prototype.setupTimestamp = function(timestamps) {
       return setupTimestamps(this, timestamps);
     };
     function getPositionalPathType(self2, path, cleanPath) {
@@ -73041,11 +73042,11 @@ var require_schema2 = __commonJS({
       getPositionalPathType(self2, path, cleanPath);
       return self2.subpaths[cleanPath];
     }
-    Schema2.prototype.queue = function(name, args) {
+    Schema3.prototype.queue = function(name, args) {
       this.callQueue.push([name, args]);
       return this;
     };
-    Schema2.prototype.pre = function(name) {
+    Schema3.prototype.pre = function(name) {
       if (name instanceof RegExp) {
         const remainingArgs = Array.prototype.slice.call(arguments, 1);
         for (const fn of hookNames) {
@@ -73065,7 +73066,7 @@ var require_schema2 = __commonJS({
       this.s.hooks.pre.apply(this.s.hooks, arguments);
       return this;
     };
-    Schema2.prototype.post = function(name) {
+    Schema3.prototype.post = function(name) {
       if (name instanceof RegExp) {
         const remainingArgs = Array.prototype.slice.call(arguments, 1);
         for (const fn of hookNames) {
@@ -73085,7 +73086,7 @@ var require_schema2 = __commonJS({
       this.s.hooks.post.apply(this.s.hooks, arguments);
       return this;
     };
-    Schema2.prototype.plugin = function(fn, opts) {
+    Schema3.prototype.plugin = function(fn, opts) {
       if (typeof fn !== "function") {
         throw new Error('First param to `schema.plugin()` must be a function, got "' + typeof fn + '"');
       }
@@ -73100,7 +73101,7 @@ var require_schema2 = __commonJS({
       fn(this, opts);
       return this;
     };
-    Schema2.prototype.method = function(name, fn, options) {
+    Schema3.prototype.method = function(name, fn, options) {
       if (typeof name !== "string") {
         for (const i in name) {
           this.methods[i] = name[i];
@@ -73112,7 +73113,7 @@ var require_schema2 = __commonJS({
       }
       return this;
     };
-    Schema2.prototype.static = function(name, fn) {
+    Schema3.prototype.static = function(name, fn) {
       if (typeof name !== "string") {
         for (const i in name) {
           this.statics[i] = name[i];
@@ -73122,7 +73123,7 @@ var require_schema2 = __commonJS({
       }
       return this;
     };
-    Schema2.prototype.index = function(fields, options) {
+    Schema3.prototype.index = function(fields, options) {
       fields || (fields = {});
       options || (options = {});
       if (options.expires) {
@@ -73143,7 +73144,7 @@ var require_schema2 = __commonJS({
       this._indexes.push([fields, options]);
       return this;
     };
-    Schema2.prototype.set = function(key, value, tags) {
+    Schema3.prototype.set = function(key, value, tags) {
       if (arguments.length === 1) {
         return this.options[key];
       }
@@ -73197,11 +73198,11 @@ var require_schema2 = __commonJS({
         _propagateOptionsToImplicitlyCreatedSchemas(schema, options);
       }
     }
-    Schema2.prototype.get = function(key) {
+    Schema3.prototype.get = function(key) {
       return this.options[key];
     };
     var indexTypes = "2d 2dsphere hashed text".split(" ");
-    Object.defineProperty(Schema2, "indexTypes", {
+    Object.defineProperty(Schema3, "indexTypes", {
       get: function() {
         return indexTypes;
       },
@@ -73209,10 +73210,10 @@ var require_schema2 = __commonJS({
         throw new Error("Cannot overwrite Schema.indexTypes");
       }
     });
-    Schema2.prototype.indexes = function() {
+    Schema3.prototype.indexes = function() {
       return getIndexes(this);
     };
-    Schema2.prototype.virtual = function(name, options) {
+    Schema3.prototype.virtual = function(name, options) {
       if (name instanceof VirtualType || getConstructorName(name) === "VirtualType") {
         return this.virtual(name.path, name.options);
       }
@@ -73285,10 +73286,10 @@ var require_schema2 = __commonJS({
       }, this.tree);
       return virtuals[name];
     };
-    Schema2.prototype.virtualpath = function(name) {
+    Schema3.prototype.virtualpath = function(name) {
       return this.virtuals.hasOwnProperty(name) ? this.virtuals[name] : null;
     };
-    Schema2.prototype.remove = function(path) {
+    Schema3.prototype.remove = function(path) {
       if (typeof path === "string") {
         path = [path];
       }
@@ -73325,7 +73326,7 @@ var require_schema2 = __commonJS({
       }
       delete branch[last];
     }
-    Schema2.prototype.removeVirtual = function(path) {
+    Schema3.prototype.removeVirtual = function(path) {
       if (typeof path === "string") {
         path = [path];
       }
@@ -73347,7 +73348,7 @@ var require_schema2 = __commonJS({
       }
       return this;
     };
-    Schema2.prototype.loadClass = function(model, virtualsOnly) {
+    Schema3.prototype.loadClass = function(model, virtualsOnly) {
       if (model === Object.prototype || model === Function.prototype || model.prototype.hasOwnProperty("$isMongooseModelPrototype") || model.prototype.hasOwnProperty("$isMongooseDocumentPrototype")) {
         return this;
       }
@@ -73388,7 +73389,7 @@ var require_schema2 = __commonJS({
       }, this);
       return this;
     };
-    Schema2.prototype._getSchema = function(path) {
+    Schema3.prototype._getSchema = function(path) {
       const _this = this;
       const pathschema = _this.path(path);
       const resultPath = [];
@@ -73461,7 +73462,7 @@ var require_schema2 = __commonJS({
       }
       return search(parts, _this);
     };
-    Schema2.prototype._getPathType = function(path) {
+    Schema3.prototype._getPathType = function(path) {
       const _this = this;
       const pathschema = _this.path(path);
       if (pathschema) {
@@ -73503,11 +73504,11 @@ var require_schema2 = __commonJS({
     function isArrayFilter(piece) {
       return piece.startsWith("$[") && piece.endsWith("]");
     }
-    Schema2.prototype._preCompile = function _preCompile() {
+    Schema3.prototype._preCompile = function _preCompile() {
       idGetter(this);
     };
-    module2.exports = exports = Schema2;
-    Schema2.Types = MongooseTypes = require_schema();
+    module2.exports = exports = Schema3;
+    Schema3.Types = MongooseTypes = require_schema();
     exports.ObjectId = MongooseTypes.ObjectId;
   }
 });
@@ -73608,7 +73609,7 @@ var require_connection2 = __commonJS({
     "use strict";
     var ChangeStream = require_changeStream();
     var EventEmitter = require("events").EventEmitter;
-    var Schema2 = require_schema2();
+    var Schema3 = require_schema2();
     var STATES = require_connectionState();
     var MongooseError = require_error2();
     var ServerSelectionError = require_serverSelection();
@@ -74054,7 +74055,7 @@ var require_connection2 = __commonJS({
       }
       if (utils.isObject(schema)) {
         if (!schema.instanceOfSchema) {
-          schema = new Schema2(schema);
+          schema = new Schema3(schema);
         } else if (!(schema instanceof this.base.Schema)) {
           schema = schema._clone(this.base.Schema);
         }
@@ -84625,7 +84626,7 @@ var require_model = __commonJS({
     var OverwriteModelError = require_overwriteModel();
     var Query = require_query2();
     var SaveOptions = require_saveOptions();
-    var Schema2 = require_schema2();
+    var Schema3 = require_schema2();
     var ValidationError = require_validation();
     var VersionError = require_version();
     var ParallelSaveError = require_parallelSave();
@@ -84689,7 +84690,7 @@ var require_model = __commonJS({
       flattenObjectIds: false
     });
     function Model(doc, fields, skipId) {
-      if (fields instanceof Schema2) {
+      if (fields instanceof Schema3) {
         throw new TypeError("2nd argument to `Model` must be a POJO or string, **not** a schema. Make sure you're calling `mongoose.model()`, not `mongoose.Model()`.");
       }
       Document.call(this, doc, fields, skipId);
@@ -85254,9 +85255,9 @@ var require_model = __commonJS({
       const mergePlugins = typeof options.mergePlugins === "boolean" ? options.mergePlugins : true;
       _checkContext(this, "discriminator");
       if (utils.isObject(schema) && !schema.instanceOfSchema) {
-        schema = new Schema2(schema);
+        schema = new Schema3(schema);
       }
-      if (schema instanceof Schema2 && clone2) {
+      if (schema instanceof Schema3 && clone2) {
         schema = schema.clone();
       }
       schema = discriminator(this, name, schema, value, mergePlugins, options.mergeHooks);
@@ -87243,7 +87244,7 @@ var require_browserDocument = __commonJS({
     var NodeJSDocument = require_document();
     var EventEmitter = require("events").EventEmitter;
     var MongooseError = require_error2();
-    var Schema2 = require_schema2();
+    var Schema3 = require_schema2();
     var ObjectId2 = require_objectid();
     var ValidationError = MongooseError.ValidationError;
     var applyHooks = require_applyHooks();
@@ -87253,7 +87254,7 @@ var require_browserDocument = __commonJS({
         return new Document(obj, schema, fields, skipId, skipInit);
       }
       if (isObject(schema) && !schema.instanceOfSchema) {
-        schema = new Schema2(schema);
+        schema = new Schema3(schema);
       }
       schema = this.schema || schema;
       if (!this.schema && schema.options._id) {
@@ -87324,7 +87325,7 @@ var require_mongoose = __commonJS({
     var Document = require_document();
     var EventEmitter = require("events").EventEmitter;
     var Kareem = require_kareem();
-    var Schema2 = require_schema2();
+    var Schema3 = require_schema2();
     var SchemaType = require_schemaType();
     var SchemaTypes = require_schema();
     var VirtualType = require_virtualType();
@@ -87373,12 +87374,12 @@ var require_mongoose = __commonJS({
         const _this = this;
         this.Schema = function() {
           this.base = _this;
-          return Schema2.apply(this, arguments);
+          return Schema3.apply(this, arguments);
         };
-        this.Schema.prototype = Object.create(Schema2.prototype);
-        Object.assign(this.Schema, Schema2);
+        this.Schema.prototype = Object.create(Schema3.prototype);
+        Object.assign(this.Schema, Schema3);
         this.Schema.base = this;
-        this.Schema.Types = Object.assign({}, Schema2.Types);
+        this.Schema.Types = Object.assign({}, Schema3.Types);
       } else {
         for (const key of ["Schema", "model"]) {
           this[key] = Mongoose.prototype[key];
@@ -87397,7 +87398,7 @@ var require_mongoose = __commonJS({
     Mongoose.prototype.ConnectionStates = STATES;
     Mongoose.prototype.driver = driver;
     Mongoose.prototype.setDriver = function setDriver(driver2) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       if (_mongoose.__driver === driver2) {
         return _mongoose;
       }
@@ -87413,7 +87414,7 @@ var require_mongoose = __commonJS({
       return _mongoose;
     };
     Mongoose.prototype.set = function(key, value) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       if (arguments.length === 1 && typeof key !== "object") {
         if (VALID_OPTIONS.indexOf(key) === -1) {
           const error2 = new SetOptionError();
@@ -87441,7 +87442,7 @@ var require_mongoose = __commonJS({
         _mongoose.options[optionKey] = optionValue;
         if (optionKey === "objectIdGetter") {
           if (optionValue) {
-            Object.defineProperty(mongoose2.Types.ObjectId.prototype, "_id", {
+            Object.defineProperty(mongoose3.Types.ObjectId.prototype, "_id", {
               enumerable: false,
               configurable: true,
               get: function() {
@@ -87449,7 +87450,7 @@ var require_mongoose = __commonJS({
               }
             });
           } else {
-            delete mongoose2.Types.ObjectId.prototype._id;
+            delete mongoose3.Types.ObjectId.prototype._id;
           }
         }
       }
@@ -87460,7 +87461,7 @@ var require_mongoose = __commonJS({
     };
     Mongoose.prototype.get = Mongoose.prototype.set;
     Mongoose.prototype.createConnection = function(uri, options) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       const Connection = _mongoose.__driver.Connection;
       const conn = new Connection(_mongoose);
       _mongoose.connections.push(conn);
@@ -87475,7 +87476,7 @@ var require_mongoose = __commonJS({
       if (typeof options === "function" || arguments.length >= 3 && typeof arguments[2] === "function") {
         throw new MongooseError("Mongoose.prototype.connect() no longer accepts a callback");
       }
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       const conn = _mongoose.connection;
       return conn.openUri(uri, options).then(() => _mongoose);
     };
@@ -87483,7 +87484,7 @@ var require_mongoose = __commonJS({
       if (arguments.length >= 1 && typeof arguments[0] === "function") {
         throw new MongooseError("Mongoose.prototype.disconnect() no longer accepts a callback");
       }
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       const remaining = _mongoose.connections.length;
       if (remaining <= 0) {
         return;
@@ -87491,18 +87492,18 @@ var require_mongoose = __commonJS({
       await Promise.all(_mongoose.connections.map((conn) => conn.close()));
     };
     Mongoose.prototype.startSession = function() {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       return _mongoose.connection.startSession.apply(_mongoose.connection, arguments);
     };
     Mongoose.prototype.pluralize = function(fn) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       if (arguments.length > 0) {
         _mongoose._pluralize = fn;
       }
       return _mongoose._pluralize;
     };
     Mongoose.prototype.model = function(name, schema, collection, options) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       if (typeof schema === "string") {
         collection = schema;
         schema = false;
@@ -87514,10 +87515,10 @@ var require_mongoose = __commonJS({
         }
         return model2;
       }
-      if (utils.isObject(schema) && !(schema instanceof Schema2)) {
-        schema = new Schema2(schema);
+      if (utils.isObject(schema) && !(schema instanceof Schema3)) {
+        schema = new Schema3(schema);
       }
-      if (schema && !(schema instanceof Schema2)) {
+      if (schema && !(schema instanceof Schema3)) {
         throw new Error("The 2nd parameter to `mongoose.model()` should be a schema or a POJO");
       }
       options = options || {};
@@ -87550,7 +87551,7 @@ var require_mongoose = __commonJS({
       return model;
     };
     Mongoose.prototype._model = function(name, schema, collection, options) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       let model;
       if (typeof name === "function") {
         model = name;
@@ -87585,25 +87586,25 @@ var require_mongoose = __commonJS({
       return model;
     };
     Mongoose.prototype.deleteModel = function(name) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       _mongoose.connection.deleteModel(name);
       delete _mongoose.models[name];
       return _mongoose;
     };
     Mongoose.prototype.modelNames = function() {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       const names = Object.keys(_mongoose.models);
       return names;
     };
     Mongoose.prototype._applyPlugins = function(schema, options) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       options = options || {};
       options.applyPluginsToDiscriminators = _mongoose.options && _mongoose.options.applyPluginsToDiscriminators || false;
       options.applyPluginsToChildSchemas = typeof (_mongoose.options && _mongoose.options.applyPluginsToChildSchemas) === "boolean" ? _mongoose.options.applyPluginsToChildSchemas : true;
       applyPlugins(schema, _mongoose.plugins, options, "$globalPluginsApplied");
     };
     Mongoose.prototype.plugin = function(fn, opts) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       _mongoose.plugins.push([fn, opts]);
       return _mongoose;
     };
@@ -87640,9 +87641,9 @@ var require_mongoose = __commonJS({
     });
     Mongoose.prototype.version = pkg2.version;
     Mongoose.prototype.Mongoose = Mongoose;
-    Mongoose.prototype.Schema = Schema2;
+    Mongoose.prototype.Schema = Schema3;
     Mongoose.prototype.SchemaType = SchemaType;
-    Mongoose.prototype.SchemaTypes = Schema2.Types;
+    Mongoose.prototype.SchemaTypes = Schema3.Types;
     Mongoose.prototype.VirtualType = VirtualType;
     Mongoose.prototype.Types = Types;
     Mongoose.prototype.Query = Query;
@@ -87651,14 +87652,14 @@ var require_mongoose = __commonJS({
     Mongoose.prototype.DocumentProvider = require_documentProvider();
     Mongoose.prototype.ObjectId = SchemaTypes.ObjectId;
     Mongoose.prototype.isValidObjectId = function(v) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       return _mongoose.Types.ObjectId.isValid(v);
     };
     Mongoose.prototype.isObjectIdOrHexString = function(v) {
       return isBsonType(v, "ObjectId") || typeof v === "string" && objectIdHexRegexp.test(v);
     };
     Mongoose.prototype.syncIndexes = function(options) {
-      const _mongoose = this instanceof Mongoose ? this : mongoose2;
+      const _mongoose = this instanceof Mongoose ? this : mongoose3;
       return _mongoose.connection.syncIndexes(options);
     };
     Mongoose.prototype.Decimal128 = SchemaTypes.Decimal128;
@@ -87677,7 +87678,7 @@ var require_mongoose = __commonJS({
     Mongoose.prototype.trusted = trusted;
     Mongoose.prototype.skipMiddlewareFunction = Kareem.skipWrappedFunction;
     Mongoose.prototype.overwriteMiddlewareResult = Kareem.overwriteResult;
-    var mongoose2 = module2.exports = exports = new Mongoose({
+    var mongoose3 = module2.exports = exports = new Mongoose({
       [defaultMongooseSymbol]: true
     });
   }
@@ -87688,9 +87689,9 @@ var require_lib10 = __commonJS({
   "node_modules/mongoose/lib/index.js"(exports, module2) {
     "use strict";
     require_driver().set(require_node_mongodb_native());
-    var mongoose2 = require_mongoose();
-    mongoose2.Mongoose.prototype.mongo = require_lib7();
-    module2.exports = mongoose2;
+    var mongoose3 = require_mongoose();
+    mongoose3.Mongoose.prototype.mongo = require_lib7();
+    module2.exports = mongoose3;
   }
 });
 
@@ -87698,54 +87699,54 @@ var require_lib10 = __commonJS({
 var require_mongoose2 = __commonJS({
   "node_modules/mongoose/index.js"(exports, module2) {
     "use strict";
-    var mongoose2 = require_lib10();
-    module2.exports = mongoose2;
-    module2.exports.default = mongoose2;
-    module2.exports.mongoose = mongoose2;
-    module2.exports.cast = mongoose2.cast;
-    module2.exports.STATES = mongoose2.STATES;
-    module2.exports.setDriver = mongoose2.setDriver;
-    module2.exports.set = mongoose2.set;
-    module2.exports.get = mongoose2.get;
-    module2.exports.createConnection = mongoose2.createConnection;
-    module2.exports.connect = mongoose2.connect;
-    module2.exports.disconnect = mongoose2.disconnect;
-    module2.exports.startSession = mongoose2.startSession;
-    module2.exports.pluralize = mongoose2.pluralize;
-    module2.exports.model = mongoose2.model;
-    module2.exports.deleteModel = mongoose2.deleteModel;
-    module2.exports.modelNames = mongoose2.modelNames;
-    module2.exports.plugin = mongoose2.plugin;
-    module2.exports.connections = mongoose2.connections;
-    module2.exports.version = mongoose2.version;
-    module2.exports.Mongoose = mongoose2.Mongoose;
-    module2.exports.Schema = mongoose2.Schema;
-    module2.exports.SchemaType = mongoose2.SchemaType;
-    module2.exports.SchemaTypes = mongoose2.SchemaTypes;
-    module2.exports.VirtualType = mongoose2.VirtualType;
-    module2.exports.Types = mongoose2.Types;
-    module2.exports.Query = mongoose2.Query;
-    module2.exports.Model = mongoose2.Model;
-    module2.exports.Document = mongoose2.Document;
-    module2.exports.ObjectId = mongoose2.ObjectId;
-    module2.exports.isValidObjectId = mongoose2.isValidObjectId;
-    module2.exports.isObjectIdOrHexString = mongoose2.isObjectIdOrHexString;
-    module2.exports.syncIndexes = mongoose2.syncIndexes;
-    module2.exports.Decimal128 = mongoose2.Decimal128;
-    module2.exports.Mixed = mongoose2.Mixed;
-    module2.exports.Date = mongoose2.Date;
-    module2.exports.Number = mongoose2.Number;
-    module2.exports.Error = mongoose2.Error;
-    module2.exports.MongooseError = mongoose2.MongooseError;
-    module2.exports.now = mongoose2.now;
-    module2.exports.CastError = mongoose2.CastError;
-    module2.exports.SchemaTypeOptions = mongoose2.SchemaTypeOptions;
-    module2.exports.mongo = mongoose2.mongo;
-    module2.exports.mquery = mongoose2.mquery;
-    module2.exports.sanitizeFilter = mongoose2.sanitizeFilter;
-    module2.exports.trusted = mongoose2.trusted;
-    module2.exports.skipMiddlewareFunction = mongoose2.skipMiddlewareFunction;
-    module2.exports.overwriteMiddlewareResult = mongoose2.overwriteMiddlewareResult;
+    var mongoose3 = require_lib10();
+    module2.exports = mongoose3;
+    module2.exports.default = mongoose3;
+    module2.exports.mongoose = mongoose3;
+    module2.exports.cast = mongoose3.cast;
+    module2.exports.STATES = mongoose3.STATES;
+    module2.exports.setDriver = mongoose3.setDriver;
+    module2.exports.set = mongoose3.set;
+    module2.exports.get = mongoose3.get;
+    module2.exports.createConnection = mongoose3.createConnection;
+    module2.exports.connect = mongoose3.connect;
+    module2.exports.disconnect = mongoose3.disconnect;
+    module2.exports.startSession = mongoose3.startSession;
+    module2.exports.pluralize = mongoose3.pluralize;
+    module2.exports.model = mongoose3.model;
+    module2.exports.deleteModel = mongoose3.deleteModel;
+    module2.exports.modelNames = mongoose3.modelNames;
+    module2.exports.plugin = mongoose3.plugin;
+    module2.exports.connections = mongoose3.connections;
+    module2.exports.version = mongoose3.version;
+    module2.exports.Mongoose = mongoose3.Mongoose;
+    module2.exports.Schema = mongoose3.Schema;
+    module2.exports.SchemaType = mongoose3.SchemaType;
+    module2.exports.SchemaTypes = mongoose3.SchemaTypes;
+    module2.exports.VirtualType = mongoose3.VirtualType;
+    module2.exports.Types = mongoose3.Types;
+    module2.exports.Query = mongoose3.Query;
+    module2.exports.Model = mongoose3.Model;
+    module2.exports.Document = mongoose3.Document;
+    module2.exports.ObjectId = mongoose3.ObjectId;
+    module2.exports.isValidObjectId = mongoose3.isValidObjectId;
+    module2.exports.isObjectIdOrHexString = mongoose3.isObjectIdOrHexString;
+    module2.exports.syncIndexes = mongoose3.syncIndexes;
+    module2.exports.Decimal128 = mongoose3.Decimal128;
+    module2.exports.Mixed = mongoose3.Mixed;
+    module2.exports.Date = mongoose3.Date;
+    module2.exports.Number = mongoose3.Number;
+    module2.exports.Error = mongoose3.Error;
+    module2.exports.MongooseError = mongoose3.MongooseError;
+    module2.exports.now = mongoose3.now;
+    module2.exports.CastError = mongoose3.CastError;
+    module2.exports.SchemaTypeOptions = mongoose3.SchemaTypeOptions;
+    module2.exports.mongo = mongoose3.mongo;
+    module2.exports.mquery = mongoose3.mquery;
+    module2.exports.sanitizeFilter = mongoose3.sanitizeFilter;
+    module2.exports.trusted = mongoose3.trusted;
+    module2.exports.skipMiddlewareFunction = mongoose3.skipMiddlewareFunction;
+    module2.exports.overwriteMiddlewareResult = mongoose3.overwriteMiddlewareResult;
   }
 });
 
@@ -88099,67 +88100,67 @@ var require_reason_phrases = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ReasonPhrases = void 0;
-    var ReasonPhrases2;
-    (function(ReasonPhrases3) {
-      ReasonPhrases3["ACCEPTED"] = "Accepted";
-      ReasonPhrases3["BAD_GATEWAY"] = "Bad Gateway";
-      ReasonPhrases3["BAD_REQUEST"] = "Bad Request";
-      ReasonPhrases3["CONFLICT"] = "Conflict";
-      ReasonPhrases3["CONTINUE"] = "Continue";
-      ReasonPhrases3["CREATED"] = "Created";
-      ReasonPhrases3["EXPECTATION_FAILED"] = "Expectation Failed";
-      ReasonPhrases3["FAILED_DEPENDENCY"] = "Failed Dependency";
-      ReasonPhrases3["FORBIDDEN"] = "Forbidden";
-      ReasonPhrases3["GATEWAY_TIMEOUT"] = "Gateway Timeout";
-      ReasonPhrases3["GONE"] = "Gone";
-      ReasonPhrases3["HTTP_VERSION_NOT_SUPPORTED"] = "HTTP Version Not Supported";
-      ReasonPhrases3["IM_A_TEAPOT"] = "I'm a teapot";
-      ReasonPhrases3["INSUFFICIENT_SPACE_ON_RESOURCE"] = "Insufficient Space on Resource";
-      ReasonPhrases3["INSUFFICIENT_STORAGE"] = "Insufficient Storage";
-      ReasonPhrases3["INTERNAL_SERVER_ERROR"] = "Internal Server Error";
-      ReasonPhrases3["LENGTH_REQUIRED"] = "Length Required";
-      ReasonPhrases3["LOCKED"] = "Locked";
-      ReasonPhrases3["METHOD_FAILURE"] = "Method Failure";
-      ReasonPhrases3["METHOD_NOT_ALLOWED"] = "Method Not Allowed";
-      ReasonPhrases3["MOVED_PERMANENTLY"] = "Moved Permanently";
-      ReasonPhrases3["MOVED_TEMPORARILY"] = "Moved Temporarily";
-      ReasonPhrases3["MULTI_STATUS"] = "Multi-Status";
-      ReasonPhrases3["MULTIPLE_CHOICES"] = "Multiple Choices";
-      ReasonPhrases3["NETWORK_AUTHENTICATION_REQUIRED"] = "Network Authentication Required";
-      ReasonPhrases3["NO_CONTENT"] = "No Content";
-      ReasonPhrases3["NON_AUTHORITATIVE_INFORMATION"] = "Non Authoritative Information";
-      ReasonPhrases3["NOT_ACCEPTABLE"] = "Not Acceptable";
-      ReasonPhrases3["NOT_FOUND"] = "Not Found";
-      ReasonPhrases3["NOT_IMPLEMENTED"] = "Not Implemented";
-      ReasonPhrases3["NOT_MODIFIED"] = "Not Modified";
-      ReasonPhrases3["OK"] = "OK";
-      ReasonPhrases3["PARTIAL_CONTENT"] = "Partial Content";
-      ReasonPhrases3["PAYMENT_REQUIRED"] = "Payment Required";
-      ReasonPhrases3["PERMANENT_REDIRECT"] = "Permanent Redirect";
-      ReasonPhrases3["PRECONDITION_FAILED"] = "Precondition Failed";
-      ReasonPhrases3["PRECONDITION_REQUIRED"] = "Precondition Required";
-      ReasonPhrases3["PROCESSING"] = "Processing";
-      ReasonPhrases3["EARLY_HINTS"] = "Early Hints";
-      ReasonPhrases3["UPGRADE_REQUIRED"] = "Upgrade Required";
-      ReasonPhrases3["PROXY_AUTHENTICATION_REQUIRED"] = "Proxy Authentication Required";
-      ReasonPhrases3["REQUEST_HEADER_FIELDS_TOO_LARGE"] = "Request Header Fields Too Large";
-      ReasonPhrases3["REQUEST_TIMEOUT"] = "Request Timeout";
-      ReasonPhrases3["REQUEST_TOO_LONG"] = "Request Entity Too Large";
-      ReasonPhrases3["REQUEST_URI_TOO_LONG"] = "Request-URI Too Long";
-      ReasonPhrases3["REQUESTED_RANGE_NOT_SATISFIABLE"] = "Requested Range Not Satisfiable";
-      ReasonPhrases3["RESET_CONTENT"] = "Reset Content";
-      ReasonPhrases3["SEE_OTHER"] = "See Other";
-      ReasonPhrases3["SERVICE_UNAVAILABLE"] = "Service Unavailable";
-      ReasonPhrases3["SWITCHING_PROTOCOLS"] = "Switching Protocols";
-      ReasonPhrases3["TEMPORARY_REDIRECT"] = "Temporary Redirect";
-      ReasonPhrases3["TOO_MANY_REQUESTS"] = "Too Many Requests";
-      ReasonPhrases3["UNAUTHORIZED"] = "Unauthorized";
-      ReasonPhrases3["UNAVAILABLE_FOR_LEGAL_REASONS"] = "Unavailable For Legal Reasons";
-      ReasonPhrases3["UNPROCESSABLE_ENTITY"] = "Unprocessable Entity";
-      ReasonPhrases3["UNSUPPORTED_MEDIA_TYPE"] = "Unsupported Media Type";
-      ReasonPhrases3["USE_PROXY"] = "Use Proxy";
-      ReasonPhrases3["MISDIRECTED_REQUEST"] = "Misdirected Request";
-    })(ReasonPhrases2 = exports.ReasonPhrases || (exports.ReasonPhrases = {}));
+    var ReasonPhrases3;
+    (function(ReasonPhrases4) {
+      ReasonPhrases4["ACCEPTED"] = "Accepted";
+      ReasonPhrases4["BAD_GATEWAY"] = "Bad Gateway";
+      ReasonPhrases4["BAD_REQUEST"] = "Bad Request";
+      ReasonPhrases4["CONFLICT"] = "Conflict";
+      ReasonPhrases4["CONTINUE"] = "Continue";
+      ReasonPhrases4["CREATED"] = "Created";
+      ReasonPhrases4["EXPECTATION_FAILED"] = "Expectation Failed";
+      ReasonPhrases4["FAILED_DEPENDENCY"] = "Failed Dependency";
+      ReasonPhrases4["FORBIDDEN"] = "Forbidden";
+      ReasonPhrases4["GATEWAY_TIMEOUT"] = "Gateway Timeout";
+      ReasonPhrases4["GONE"] = "Gone";
+      ReasonPhrases4["HTTP_VERSION_NOT_SUPPORTED"] = "HTTP Version Not Supported";
+      ReasonPhrases4["IM_A_TEAPOT"] = "I'm a teapot";
+      ReasonPhrases4["INSUFFICIENT_SPACE_ON_RESOURCE"] = "Insufficient Space on Resource";
+      ReasonPhrases4["INSUFFICIENT_STORAGE"] = "Insufficient Storage";
+      ReasonPhrases4["INTERNAL_SERVER_ERROR"] = "Internal Server Error";
+      ReasonPhrases4["LENGTH_REQUIRED"] = "Length Required";
+      ReasonPhrases4["LOCKED"] = "Locked";
+      ReasonPhrases4["METHOD_FAILURE"] = "Method Failure";
+      ReasonPhrases4["METHOD_NOT_ALLOWED"] = "Method Not Allowed";
+      ReasonPhrases4["MOVED_PERMANENTLY"] = "Moved Permanently";
+      ReasonPhrases4["MOVED_TEMPORARILY"] = "Moved Temporarily";
+      ReasonPhrases4["MULTI_STATUS"] = "Multi-Status";
+      ReasonPhrases4["MULTIPLE_CHOICES"] = "Multiple Choices";
+      ReasonPhrases4["NETWORK_AUTHENTICATION_REQUIRED"] = "Network Authentication Required";
+      ReasonPhrases4["NO_CONTENT"] = "No Content";
+      ReasonPhrases4["NON_AUTHORITATIVE_INFORMATION"] = "Non Authoritative Information";
+      ReasonPhrases4["NOT_ACCEPTABLE"] = "Not Acceptable";
+      ReasonPhrases4["NOT_FOUND"] = "Not Found";
+      ReasonPhrases4["NOT_IMPLEMENTED"] = "Not Implemented";
+      ReasonPhrases4["NOT_MODIFIED"] = "Not Modified";
+      ReasonPhrases4["OK"] = "OK";
+      ReasonPhrases4["PARTIAL_CONTENT"] = "Partial Content";
+      ReasonPhrases4["PAYMENT_REQUIRED"] = "Payment Required";
+      ReasonPhrases4["PERMANENT_REDIRECT"] = "Permanent Redirect";
+      ReasonPhrases4["PRECONDITION_FAILED"] = "Precondition Failed";
+      ReasonPhrases4["PRECONDITION_REQUIRED"] = "Precondition Required";
+      ReasonPhrases4["PROCESSING"] = "Processing";
+      ReasonPhrases4["EARLY_HINTS"] = "Early Hints";
+      ReasonPhrases4["UPGRADE_REQUIRED"] = "Upgrade Required";
+      ReasonPhrases4["PROXY_AUTHENTICATION_REQUIRED"] = "Proxy Authentication Required";
+      ReasonPhrases4["REQUEST_HEADER_FIELDS_TOO_LARGE"] = "Request Header Fields Too Large";
+      ReasonPhrases4["REQUEST_TIMEOUT"] = "Request Timeout";
+      ReasonPhrases4["REQUEST_TOO_LONG"] = "Request Entity Too Large";
+      ReasonPhrases4["REQUEST_URI_TOO_LONG"] = "Request-URI Too Long";
+      ReasonPhrases4["REQUESTED_RANGE_NOT_SATISFIABLE"] = "Requested Range Not Satisfiable";
+      ReasonPhrases4["RESET_CONTENT"] = "Reset Content";
+      ReasonPhrases4["SEE_OTHER"] = "See Other";
+      ReasonPhrases4["SERVICE_UNAVAILABLE"] = "Service Unavailable";
+      ReasonPhrases4["SWITCHING_PROTOCOLS"] = "Switching Protocols";
+      ReasonPhrases4["TEMPORARY_REDIRECT"] = "Temporary Redirect";
+      ReasonPhrases4["TOO_MANY_REQUESTS"] = "Too Many Requests";
+      ReasonPhrases4["UNAUTHORIZED"] = "Unauthorized";
+      ReasonPhrases4["UNAVAILABLE_FOR_LEGAL_REASONS"] = "Unavailable For Legal Reasons";
+      ReasonPhrases4["UNPROCESSABLE_ENTITY"] = "Unprocessable Entity";
+      ReasonPhrases4["UNSUPPORTED_MEDIA_TYPE"] = "Unsupported Media Type";
+      ReasonPhrases4["USE_PROXY"] = "Use Proxy";
+      ReasonPhrases4["MISDIRECTED_REQUEST"] = "Misdirected Request";
+    })(ReasonPhrases3 = exports.ReasonPhrases || (exports.ReasonPhrases = {}));
   }
 });
 
@@ -88236,7 +88237,7 @@ module.exports = __toCommonJS(handler_exports);
 var import_serverless_express = __toESM(require_src2());
 
 // src/main.ts
-var import_express2 = __toESM(require_express3());
+var import_express3 = __toESM(require_express3());
 var import_cors = __toESM(require_lib3());
 var import_body_parser = __toESM(require_body_parser2());
 var dotenv = __toESM(require_main());
@@ -88257,11 +88258,38 @@ async function InitializeDB() {
 
 // src/modules/Order/Order.schema.ts
 var import_mongoose2 = __toESM(require_mongoose2());
-var OrderSchema = new import_mongoose2.Schema({
-  Date: String,
-  Order: String,
-  FinalPrice: Number
-});
+var OrderSchema = new import_mongoose2.Schema(
+  {
+    Date: String,
+    Order: String,
+    FinalPrice: Number,
+    Products: [
+      {
+        Product: {
+          type: import_mongoose2.Schema.Types.ObjectId,
+          ref: "Product"
+        },
+        Qty: {
+          type: Number,
+          default: 1
+        },
+        TotalPrice: {
+          type: Number
+        }
+      }
+    ]
+  },
+  {
+    virtuals: {
+      ID: {
+        get() {
+          return this._id;
+        }
+      }
+    }
+  }
+);
+OrderSchema.set("toJSON", { virtuals: true });
 var Order_schema_default = OrderSchema;
 
 // src/modules/Order/Order.controller.ts
@@ -88288,10 +88316,9 @@ var OrderController = class {
       res.status(import_http_status_codes.default.OK).send(response);
     } catch (error) {
       console.log("OrderController GET: ", error);
-      res.sendStatus(import_http_status_codes.default.INTERNAL_SERVER_ERROR);
       response.status = import_http_status_codes.default.INTERNAL_SERVER_ERROR;
       response.message = import_http_status_codes.ReasonPhrases.INTERNAL_SERVER_ERROR;
-      res.send(response);
+      res.status(import_http_status_codes.default.BAD_REQUEST).send(response);
     }
   }
   async createOrder(req, res) {
@@ -88299,7 +88326,7 @@ var OrderController = class {
     res.contentType("application/json");
     const payload = req.body;
     if (!payload) {
-      response.message = "Fields were not supplied.";
+      response.message = "fields were not supplied.";
       response.status = import_http_status_codes.default.BAD_REQUEST;
       res.status(import_http_status_codes.default.BAD_REQUEST).send(response);
       return;
@@ -88325,7 +88352,10 @@ var OrderService = class {
   }
   async getOrders() {
     try {
-      return this.model.find();
+      return await this.model.find().populate({
+        path: "Products.Product",
+        model: "Product"
+      }).exec();
     } catch (error) {
       console.log("OrderService: ", error);
       throw error;
@@ -88357,14 +88387,188 @@ var OrderModule = class {
   }
 };
 
+// src/modules/Product/Product.schema.ts
+var import_mongoose3 = __toESM(require_mongoose2());
+var ProductSchema = new import_mongoose3.Schema({
+  Name: String,
+  UnitPrice: Number
+});
+ProductSchema.virtual("ID").get(function() {
+  return this._id;
+});
+ProductSchema.set("toJSON", { virtuals: true });
+var Product_schema_default = ProductSchema;
+
+// src/modules/Product/Product.controller.ts
+var import_express2 = __toESM(require_express3());
+var import_http_status_codes2 = __toESM(require_cjs());
+var ProductController = class {
+  constructor(orderService) {
+    this.orderService = orderService;
+  }
+  Init() {
+    const router = (0, import_express2.Router)();
+    router.get("/", this.getProducts.bind(this));
+    router.post("/", this.createProduct.bind(this));
+    return router;
+  }
+  async getProducts(req, res) {
+    const response = {};
+    res.contentType("application/json");
+    try {
+      const orders = await this.orderService.getProducts();
+      response.data = orders;
+      response.message = "success";
+      response.status = import_http_status_codes2.default.OK;
+      res.status(import_http_status_codes2.default.OK).send(response);
+    } catch (error) {
+      console.log("ProductController GET: ", error);
+      res.sendStatus(import_http_status_codes2.default.INTERNAL_SERVER_ERROR);
+      response.status = import_http_status_codes2.default.INTERNAL_SERVER_ERROR;
+      response.message = import_http_status_codes2.ReasonPhrases.INTERNAL_SERVER_ERROR;
+      res.send(response);
+    }
+  }
+  async createProduct(req, res) {
+    const response = {};
+    res.contentType("application/json");
+    const payload = req.body;
+    if (!payload) {
+      response.message = "Fields were not supplied.";
+      response.status = import_http_status_codes2.default.BAD_REQUEST;
+      res.status(import_http_status_codes2.default.BAD_REQUEST).send(response);
+      return;
+    }
+    try {
+      await this.orderService.createProduct(payload);
+      response.status = import_http_status_codes2.default.CREATED;
+      response.message = "Product was successfully created.";
+      res.status(import_http_status_codes2.default.CREATED).send(response);
+    } catch (error) {
+      console.log("ProductController CREATE: ", error);
+      response.message = import_http_status_codes2.ReasonPhrases.INTERNAL_SERVER_ERROR;
+      response.status = import_http_status_codes2.default.INTERNAL_SERVER_ERROR;
+      res.status(import_http_status_codes2.default.INTERNAL_SERVER_ERROR).send(response);
+    }
+  }
+};
+
+// src/modules/Product/Product.service.ts
+var ProductService = class {
+  constructor(model) {
+    this.model = model;
+  }
+  async getProducts() {
+    try {
+      return this.model.find();
+    } catch (error) {
+      console.log("ProductService: ", error);
+      throw error;
+    }
+  }
+  async createProduct(payload) {
+    try {
+      await this.model.create(payload);
+    } catch (error) {
+      console.log("ProductService: createProduct", error);
+      throw error;
+    }
+  }
+};
+
+// src/mocks/MOCK_PRODUCTS.ts
+var import_mongoose4 = __toESM(require_mongoose2());
+var MOCK_PRODUCTS = [
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Bread",
+    UnitPrice: 2.99
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Milk",
+    UnitPrice: 1.99
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Eggs",
+    UnitPrice: 2.49
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Rice",
+    UnitPrice: 3.99
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Water",
+    UnitPrice: 0.99
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Toilet Paper",
+    UnitPrice: 4.49
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Soap",
+    UnitPrice: 1.79
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Canned Beans",
+    UnitPrice: 1.29
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Diapers",
+    UnitPrice: 8.99
+  },
+  {
+    ID: new import_mongoose4.default.Types.ObjectId().toHexString(),
+    Name: "Salt",
+    UnitPrice: 0.79
+  }
+];
+var MOCK_PRODUCTS_default = MOCK_PRODUCTS;
+
+// src/modules/Product/index.ts
+var ProductModule = class {
+  constructor() {
+  }
+  static async Seeder(model) {
+    console.log("Seeder");
+    if (await model.countDocuments() >= 1)
+      return;
+    try {
+      const result = await model.insertMany(MOCK_PRODUCTS_default);
+      console.log(`${result.length} documents inserted successfully`);
+    } catch (error) {
+      console.error("error when seeding product", error);
+    }
+  }
+  static async Init(dbClient, router) {
+    const ProductModel = dbClient.model(
+      "Product",
+      Product_schema_default
+    );
+    await ProductModule.Seeder(ProductModel);
+    const orderService = new ProductService(ProductModel);
+    const orderController = new ProductController(orderService);
+    const subRoutes = orderController.Init();
+    router.use("/products", subRoutes);
+  }
+};
+
 // src/main.ts
 var { urlencoded } = import_body_parser.default;
 dotenv.config();
 var Application = class {
+  app;
   constructor() {
-    const app = (0, import_express2.default)();
-    app.use(import_express2.default.urlencoded({ extended: true }));
-    app.use(import_express2.default.json());
+    const app = (0, import_express3.default)();
+    app.use(import_express3.default.urlencoded({ extended: true }));
+    app.use(import_express3.default.json());
     app.use((0, import_cors.default)());
     app.use(urlencoded({ extended: false }));
     this.app = app;
@@ -88372,6 +88576,7 @@ var Application = class {
   async Init() {
     const dbClient = await InitializeDB();
     OrderModule.Init(dbClient, this.app);
+    await ProductModule.Init(dbClient, this.app);
     this.app.use("/hello", (_, res, _2) => {
       res.status(200).json({ message: "Project Created by Asis Melgarejo" });
     });

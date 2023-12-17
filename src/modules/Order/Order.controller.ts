@@ -28,24 +28,30 @@ export default class OrderController {
       res.status(httpStatus.OK).send(response);
     } catch (error) {
       console.log("OrderController GET: ", error);
-
-      res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-
       response.status = httpStatus.INTERNAL_SERVER_ERROR;
       response.message = ReasonPhrases.INTERNAL_SERVER_ERROR;
-
-      res.send(response);
+      res.status(httpStatus.BAD_REQUEST).send(response);
     }
   }
   async createOrder(req: Request, res: Response) {
     const response: HttpResponse<OrderDTO[]> = {};
     res.contentType("application/json");
-    const payload = req.body as Omit<OrderDTO, "_id">;
+    const payload = req.body as unknown as OrderDTO;
 
     if (!payload) {
-      response.message = "Fields were not supplied.";
-      response.status = httpStatus.BAD_REQUEST;
+      // switch (true) {
+      //   case !payload.Order:
+      //     response.message = "Order field was supplied."; break;
+      //   case !payload.Date:
+      //     response.message = "Order field was supplied."; break;
+      //   case !payload.FinalPrice:
+      //     response.message = "FinalPrice field was supplied."; break;
+      //   case !payload.Products:
+      //     response.message = "Products field was supplied."; break;
+      // }
+      response.message = "fields were not supplied.";
 
+      response.status = httpStatus.BAD_REQUEST;
       res.status(httpStatus.BAD_REQUEST).send(response);
       return;
     }

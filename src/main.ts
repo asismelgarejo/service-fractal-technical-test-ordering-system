@@ -9,6 +9,7 @@ import { InitializeDB } from "./database";
 
 import OrderModule from "./modules/Order";
 import { PORT } from "./constants/app";
+import ProductModule from "modules/Product";
 
 export default class Application {
   app: Express;
@@ -24,6 +25,7 @@ export default class Application {
   async Init() {
     const dbClient = await InitializeDB();
     OrderModule.Init(dbClient, this.app);
+    await ProductModule.Init(dbClient, this.app);
 
     this.app.use("/hello", (_, res, _2) => {
       res.status(200).json({ message: "Project Created by Asis Melgarejo" });
